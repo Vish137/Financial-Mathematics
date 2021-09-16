@@ -14,7 +14,7 @@ end
 stderror=zeros(1,N);
 for k=1:N    
     U(k)=exp(-r*T)*U(k)/k;
-    stderror(k)=std(U)/sqrt(k);
+    stderror(k)=std(W)/sqrt(k);
 end
 figure(1)
 plot(1:N,U,'-b')
