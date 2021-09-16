@@ -44,7 +44,7 @@ beta=-log(K/S)-(r-0.5*sigma^2)*T\sigma\sqrt(T);
 Y=randn(1,N);
 W=zeros(1,N);
 for k=1:N
-    W(k)=max(S*exp((r-0.5*sigma^2)*T+sigma*sqrt(T)*(Y(k)-beta))-K,0)*exp(beta*Y(k)-0.5*beta^2);
+    W(k)=max(K-S*exp((r-0.5*sigma^2)*T+sigma*sqrt(T)*(Y(k)-beta)),0)*exp(beta*Y(k)-0.5*beta^2);
 end 
 U=zeros(1,N);
 U(1)=W(1);
@@ -94,7 +94,8 @@ figure(1)
 plot(1:N,U,'DisplayName','Antithetic var')
 hold on
 figure(1)
-yline(BSExact(S,K,r,sigma,T),'-.r','','LineWidth',0.5,'DisplayName','Black-Scholes Exact')
+xvar=ones(1,N);
+yline(BSExact(S,K,r,sigma,T),'-.k','','LineWidth',1,'DisplayName','Black-Scholes Exact')
 legend
 hold off
 saveas(gcf,'EU_Put_MC_Convergence','png')
