@@ -94,7 +94,6 @@ figure(1)
 plot(1:N,U,'DisplayName','Antithetic var')
 hold on
 figure(1)
-xvar=ones(1,N);
 yline(BSExact(S,K,r,sigma,T),'-.k','','LineWidth',1,'DisplayName','Black-Scholes Exact')
 legend
 hold off
