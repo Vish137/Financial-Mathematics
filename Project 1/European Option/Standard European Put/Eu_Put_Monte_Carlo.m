@@ -39,6 +39,7 @@ hold on
 clear all
 %OPTION PARAMETERS%
 S=100;K=100;r=0.07;sigma=0.25;T=1;N=10^4;
+
 %IMPORTANCE SAMPLING MONTE CARLO APPROACH
 beta=-log(K/S)-(r-0.5*sigma^2)*T\sigma\sqrt(T);
 Y=randn(1,N);
@@ -67,6 +68,7 @@ hold on
 clear all
 %OPTION PARAMETERS%
 S=100;K=100;r=0.07;sigma=0.25;T=1;N=10^4;
+
 %VARIANCE REDUCTION MONTE CARLO APPROACH
 N=10^4;
 Y=randn(1,N); %brownian motion random term
