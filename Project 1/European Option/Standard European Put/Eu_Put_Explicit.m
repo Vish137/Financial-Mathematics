@@ -47,7 +47,7 @@ grid minor
 legend({'\lambda = 0.1389','Interpreter','latex'})
 saveas(gcf,'Eu_Put_Explicit_Stable','png')
 
-clear all
+clear vars
 %OPTION PARAMETERS
 T=1;
 sigma =0.2;
@@ -102,3 +102,4 @@ ylabel ('Option Price, $(V_0, S_0)$','Interpreter','latex')
 grid minor
 legend({'\lambda = 0.5556','Interpreter','latex'})
 saveas(gcf,'Eu_Put_Explicit_Unstable','png')
+

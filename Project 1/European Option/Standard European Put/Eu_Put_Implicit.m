@@ -1,3 +1,4 @@
+clear vars
 %Option parameters%
 sigma=0.2;
 r=0.07;
@@ -46,14 +47,16 @@ for m=2:M+1
     end
     u=w;
 end
+
 S=zeros(1,N+1);
 V=zeros(1,N+1);
 for n=1:N+1    
     S(n)=K*exp(x(n));    
     V(n)=u(n)*K*exp(-(q-1)/2*x(n)-(q+1)^2/4*sigma^2*T/2) - (S(n) - K*exp(-r*T));
 end
+
 figure(1)
-plot(S,V,'-b')
+plot(S,V,'-r')
 grid minor
 title('European Black Scholes PDE - Implicit Scheme')
 xlabel('Initial Price, S_0')
