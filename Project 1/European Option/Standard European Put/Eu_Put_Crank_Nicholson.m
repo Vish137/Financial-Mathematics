@@ -14,7 +14,7 @@ lambda=dt/dx^2;
 
 %Create x-axis
 x=zeros(1,N+1);
-for n=1:N
+for n=1:N+1
     x(n)=-3*sigma*sqrt(T)+(n-1)*dx;
 end
 
