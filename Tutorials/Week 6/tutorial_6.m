@@ -1,5 +1,5 @@
 %|--------------------------|%
-%| FMAT3888 Tutorial Week 5 |%
+%| FMAT3888 Tutorial Week 6 |%
 %| Author: Vishaal Lingam   |%
 %| Date: 14-09-2021         |%
 %|--------------------------|%
