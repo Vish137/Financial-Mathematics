@@ -5,8 +5,8 @@
 %
 function [covariances,covariancep] = covariance(i,j)
 arguments
-    i double {mustBeNonnegative}
-    j double {mustBeNonnegative}
+    i (1,1) double {mustBeNonnegative}
+    j (1,1) double {mustBeNonnegative}
 end
    
 %TODO
