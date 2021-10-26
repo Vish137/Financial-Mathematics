@@ -4,6 +4,11 @@
 %Description: calculates covariance (sample and population) of assets (i,j)
 %
 function [covariances,covariancep] = covariance(i,j)
+arguments
+    i double {mustBeNonnegative}
+    j double {mustBeNonnegative}
+end
+   
 %TODO
 %Create KWARG for specified time period - or do it manually
 %
@@ -18,4 +23,5 @@ for index=1:rows
 end
 covariances=isum; %sample covariance
 covariancep=nsum; %population covariance
+end
 
