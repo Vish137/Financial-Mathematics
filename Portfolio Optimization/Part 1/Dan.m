@@ -145,7 +145,7 @@ portopt(interval_A_mu2, covariance_A2, 2000)    %This is fucked, not too sure wh
 %5b) (this doesn't work, not too sure why)
 syms w1 w2 w3 w4 w5 w6 lambda 
 A = [w1 w2 w3 w4 w5 w6] * covariance_A2 * transpose([w1 w2 w3 w4 w5 w6]); %Objective
-V = w1+w2+w3+w4+w5+w6 == 1; %Constraint 
+V = w1+w2+w3+w4+w5+w6 == 1; %Constraint (Missing other constraint, no point putting it in rn if base case doesn't work) 
 L = A + lambda * lhs(V); %Lagrange 
 dL_dw1 = diff(L, w1) == 0; % derivative of L with respect to wl
 dL_dw2 = diff(L, w2) == 0; % derivative of L with respect to w2
