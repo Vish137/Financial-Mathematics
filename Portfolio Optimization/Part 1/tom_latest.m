@@ -85,7 +85,7 @@ annual_A = zeros(3,6); %Create an empty 3by6 matrix to store annual returns
 for i=1:3 %Cycle through rows of annual matrix
     raw = raw_interval_A(12*(i-1)+1,:); 
     for j = (i-1)*12+1:i*12 %Cycle through each set of 12 rows (raws)
-        raw = raw.*(1+raw_interval_A(j,:)) 
+        raw = raw.*(1+raw_interval_A(j,:)); 
     end
     annual_A(i,1:6) = raw;
 end
@@ -95,13 +95,13 @@ annual_B = zeros(3,6); %Create an empty 3by6 matrix to store annual returns
 for i=1:3 %Cycle through rows of annual matrix
     raw = raw_interval_B(12*(i-1)+1,:); 
     for j = (i-1)*12+1:i*12 %Cycle through each set of 12 rows (raws)
-        raw = raw.*(1+raw_interval_B(j,:)) 
+        raw = raw.*(1+raw_interval_B(j,:)); 
     end
     annual_B(i,1:6) = raw;
 end
 
-annual_A
-annual_B
+disp(annual_A);
+disp(annual_B);
 
     
 

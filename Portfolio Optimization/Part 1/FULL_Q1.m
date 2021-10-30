@@ -21,7 +21,7 @@ opts.VariableTypes = ["datetime", "double", "double", "double", "double", "doubl
 opts = setvaropts(opts, "DATE", "InputFormat", "");
 
 % Import the data
-data = readtable("/Users/thomaspapasavvas/Desktop/data.xlsx", opts, "UseExcel", false);
+data = readtable("rawdata.xlsx", opts, "UseExcel", false);
 
 %Prepare Data
 
@@ -55,11 +55,11 @@ interval_B = data(date_B_1:date_B_2,:);
 %Estimate a_i's
 %Interval A
 interval_A_nodate = interval_A(:,2:7); %remove date column
-a_interval_A = varfun(@mean,interval_A_nodate) %find mean of each column
+a_interval_A = varfun(@mean,interval_A_nodate); %find mean of each column
 
 %Interval B
 interval_B_nodate = interval_B(:,2:7); %remove date column
-a_interval_B = varfun(@mean,interval_B_nodate) %find mean of each column
+a_interval_B = varfun(@mean,interval_B_nodate); %find mean of each column
 
 %Estimate b_ij's
 

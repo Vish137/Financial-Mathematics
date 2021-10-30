@@ -62,19 +62,19 @@ raw_interval_B = table2array(raw_interval_B);
 %Interval A
 A_normal = log(raw_interval_A+1); %Convert to X's X = ln(alpha + 1)
 a_A = mean(A_normal); %Calculate a's
-a_A
+display(a_A);
 
 %Interval B
 B_normal = log(raw_interval_B+1); %Convert to X's X = ln(alpha + 1)
 a_B = mean(B_normal); %Calculate a's
-a_B
+display(a_B);
 
 %Estimate b_ij's
 
 %Interval A
 C_A = cov(A_normal); %Find covariance matrix
-C_A
+display(C_A);
 
 %Interval B
 C_B = cov(B_normal); %Find covariance matrix
-C_B
+display(C_B);
