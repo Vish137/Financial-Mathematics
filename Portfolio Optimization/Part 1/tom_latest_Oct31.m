@@ -152,11 +152,14 @@ corr_R2_B = corrcoef(two_year_B);
 
 %Using interval_A data
 
-mu_A = w1*mu_R2_A(1)+w2*mu_R2_A(2)+w3*mu_R2_A(3)+w4*mu_R2_A(4)+w5*mu_R2_A(5)+w6*mu_R2_A(6);
-sigma_A = w1^2*C_R2_A(1,1)+w2^2*C_R2_A(2,2)+w3^2*C_R2_A(3,3)+w4^2*C_R2_A(4,4)+w5^2*C_R2_A(5,5)+w6^2*C_R2_A(6,6);
+%syms f(w1,w2,w3,w4,w5,w6)
+%f(w1,w2,w3,w4,w5,w6) = w1*mu_R2_A(1)+w2*mu_R2_A(2)+w3*mu_R2_A(3)+w4*mu_R2_A(4)+w5*mu_R2_A(5)+w6*mu_R2_A(6);
 
-syms w1 w2 w3 w4 w5 w6 lambda
-[solw1, solw2, solw3, solw4, solw5, solw6, sollambda] = solve(lambda == (-2*mu_R2_A(1)-2*w1*C_R2_A(1,1))*exp(-2*mu_A-sigma_A), lambda == (-2*mu_R2_A(2)-2*w2*C_R2_A(2,2))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(3)-2*w3*C_R2_A(3,3))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(4)-2*w4*C_R2_A(4,4))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(5)-2*w5*C_R2_A(5,5))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(6)-2*w6*C_R2_A(6,6))*exp(-2*mu_A-sigma_A), w1+w2+w3+w4+w5+w6==1)
+%syms g(w1,w2,w3,w4,w5,w6)
+%g(w1,w2,w3,w4,w5,w6) = w1^2*C_R2_A(1,1)+w2^2*C_R2_A(2,2)+w3^2*C_R2_A(3,3)+w4^2*C_R2_A(4,4)+w5^2*C_R2_A(5,5)+w6^2*C_R2_A(6,6);
+
+%syms w1 w2 w3 w4 w5 w6 lambda
+%solw1, solw2, solw3, solw4, solw5, solw6, sollambda] = solve(lambda == (-2*mu_R2_A(1)-2*w1*C_R2_A(1,1))*exp(-2*mu_A-sigma_A), lambda == (-2*mu_R2_A(2)-2*w2*C_R2_A(2,2))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(3)-2*w3*C_R2_A(3,3))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(4)-2*w4*C_R2_A(4,4))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(5)-2*w5*C_R2_A(5,5))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(6)-2*w6*C_R2_A(6,6))*exp(-2*mu_A-sigma_A), w1+w2+w3+w4+w5+w6==1)
 
 
 
