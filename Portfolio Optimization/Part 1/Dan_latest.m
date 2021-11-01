@@ -210,22 +210,5 @@ system = [dL_dw1;dL_dw2;dL_dw3;dL_dw4;dL_dw5;dL_dw6;dL_dlambda;]; % build the sy
 [w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_val] = solve(system, [w1 w2 w3 w4 w5 w6 lambda ], 'Real', true);
 results_numeric = [w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_val];
 
-%This is with the expected return constraint and slack variable, this doesn't work, there's an error somewhere 
-syms w1 w2 w3 w4 w5 w6 s lambda phi 
-A = [w1 w2 w3 w4 w5 w6] * C_R2_A * transpose([w1 w2 w3 w4 w5 w6]); %Objective
-V = w1+w2+w3+w4+w5+w6 -1 == 0; %First constraint 
-Y = transpose([w1 w2 w3 w4 w5 w6]) * interval_B_mu2 -0.12 - s^2 == 0; %Second constraint 
-L = A + lambda * lhs(V) + phi * lhs(Y); %Lagrange 
-dL_dw1 = diff(L, w1) == 0; % derivative of L with respect to wl
-dL_dw2 = diff(L, w2) == 0; % derivative of L with respect to w2
-dL_dw3 = diff(L, w3) == 0; % derivative of L with respect to w3
-dL_dw4 = diff(L, w4) == 0; % derivative of L with respect to w4
-dL_dw5 = diff(L, w5) == 0; % derivative of L with respect to w5
-dL_dw6 = diff(L, w6) == 0; % derivative of L with respect to w6
-dL_dlambda = diff(L,lambda) == 0; % derivative of L with respect to lambda
-dL_dphi = diff(L, phi) == 0; %derivative of L with respect to phi 
-system = [dL_dw1;dL_dw2;dL_dw3;dL_dw4;dL_dw5;dL_dw6;dL_dlambda;dL_dphi;]; % build the system of equations
-[w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, s_val, lambda_val, phi_val] = solve(system, [w1 w2 w3 w4 w5 w6 s lambda phi], 'Real', true);
-results_numeric = [w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, s_val, lambda_val, phi_val];
 
 
