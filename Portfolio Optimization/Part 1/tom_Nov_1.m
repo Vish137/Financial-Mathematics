@@ -212,12 +212,11 @@ utility_B = double(exp(-2*f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)-g(SS.w1,SS.w2,S
 % plotFrontier(q)
 % hold off;
 % legend({'p','q'})
-e = ones(1,6);
+e = ones(6,1);
 eT = transpose(e);
 %Portfolio parameters
-a = e*corr_R2_A*eT;
-b = e*corr_R2_A*transpose(mu_R2_A);
-c = 
+a = eT*inv(C_R2_A)*e;
+b = mu_R2_A;
 %Part b - Optimal Portfolio with Constraints
 
 
