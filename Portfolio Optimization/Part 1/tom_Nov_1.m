@@ -162,11 +162,11 @@ mu_A = f(w1,w2,w3,w4,w5,w6);
 sigma_A = g(w1,w2,w3,w4,w5,w6);
 
 syms w1 w2 w3 w4 w5 w6 lambda
-S = solve(w1+w2+w3+w4+w5+w6 == 1,lambda == (-2*mu_R2_A(1)-2*w1*C_R2_A(1,1))*exp(-2*mu_A-sigma_A), lambda == (-2*mu_R2_A(2)-2*w2*C_R2_A(2,2))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(3)-2*w3*C_R2_A(3,3))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(4)-2*w4*C_R2_A(4,4))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(5)-2*w5*C_R2_A(5,5))*exp(-2*mu_A-sigma_A),lambda == (-2*mu_R2_A(6)-2*w6*C_R2_A(6,6))*exp(-2*mu_A-sigma_A));
+S = solve(w1+w2+w3+w4+w5+w6 == 1,lambda == (-mu_R2_A(1)+w1*C_R2_A(1,1))*exp(-mu_A+0.5*sigma_A), lambda == (-mu_R2_A(2)+w2*C_R2_A(2,2))*exp(-mu_A+0.5*sigma_A),lambda == (-mu_R2_A(3)+w3*C_R2_A(3,3))*exp(-mu_A+0.5*sigma_A),lambda == (-mu_R2_A(4)+w4*C_R2_A(4,4))*exp(-mu_A+0.5*sigma_A),lambda == (-mu_R2_A(5)+w5*C_R2_A(5,5))*exp(-mu_A+0.5*sigma_A),lambda == (-mu_R2_A(6)+w6*C_R2_A(6,6))*exp(-mu_A+0.5*sigma_A));
 
 %Calculate Expected Utility from Solution
 
-utility_A = double(exp(-2*f(S.w1,S.w2,S.w3,S.w4,S.w5,S.w6)-g(S.w1,S.w2,S.w3,S.w4,S.w5,S.w6)));
+utility_A = double(exp(-f(S.w1,S.w2,S.w3,S.w4,S.w5,S.w6)+0.5*g(S.w1,S.w2,S.w3,S.w4,S.w5,S.w6)));
 
 %Using Interval B data
 
@@ -180,12 +180,11 @@ mu_B = f(w1,w2,w3,w4,w5,w6);
 sigma_B = g(w1,w2,w3,w4,w5,w6);
 
 syms w1 w2 w3 w4 w5 w6 lambda
-SS = solve(w1+w2+w3+w4+w5+w6 == 1,lambda == (-2*mu_R2_B(1)-2*w1*C_R2_B(1,1))*exp(-2*mu_B-sigma_B), lambda == (-2*mu_R2_B(2)-2*w2*C_R2_B(2,2))*exp(-2*mu_B-sigma_B),lambda == (-2*mu_R2_B(3)-2*w3*C_R2_B(3,3))*exp(-2*mu_B-sigma_B),lambda == (-2*mu_R2_B(4)-2*w4*C_R2_B(4,4))*exp(-2*mu_B-sigma_B),lambda == (-2*mu_R2_B(5)-2*w5*C_R2_B(5,5))*exp(-2*mu_B-sigma_B),lambda == (-2*mu_R2_B(6)-2*w6*C_R2_B(6,6))*exp(-2*mu_B-sigma_B));
+SS = solve(w1+w2+w3+w4+w5+w6 == 1,lambda == (-mu_R2_B(1)+w1*C_R2_B(1,1))*exp(-mu_B+0.5*sigma_B), lambda == (-mu_R2_B(2)+w2*C_R2_B(2,2))*exp(-mu_B+0.5*sigma_B),lambda == (-mu_R2_B(3)+w3*C_R2_B(3,3))*exp(-mu_B+0.5*sigma_B),lambda == (-mu_R2_B(4)+w4*C_R2_B(4,4))*exp(-mu_B+0.5*sigma_B),lambda == (-mu_R2_B(5)+w5*C_R2_B(5,5))*exp(-mu_B+0.5*sigma_B),lambda == (-mu_R2_B(6)+w6*C_R2_B(6,6))*exp(-mu_B+0.5*sigma_B));
 
 %Calculate Expected Utility from Solution
 
-utility_B = double(exp(-2*f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)-g(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)));
-
+utility_B = double(exp(-f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)+0.5*g(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)));
 %%
 
 %Question 5
@@ -223,4 +222,7 @@ mu0 = b/a;var0 = 1/a;
 %this is a change
 %Part b - Optimal Portfolio with Constraints
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c9e339a7f177eddf72d5fb8a49f564f8e5c3f336
