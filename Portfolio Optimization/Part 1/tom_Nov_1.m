@@ -21,7 +21,7 @@ opts.VariableTypes = ["datetime", "double", "double", "double", "double", "doubl
 opts = setvaropts(opts, "DATE", "InputFormat", "");
 
 % Import the data
-data = readtable("/Users/thomaspapasavvas/Desktop/data.xlsx", opts, "UseExcel", false);
+data = readtable("rawdata.xlsx", opts, "UseExcel", false);
 
 %Prepare Data
 
@@ -79,21 +79,21 @@ C_B = cov(B_normal); %Find covariance matrix
 %Question 3
 
 %Find Annual Returns
-
+n1=4; %number of years in period 1
 %Interval A
-annual_A = zeros(3,6); %Create an empty 3by6 matrix to store annual returns
-for i=1:3 %Cycle through rows of annual matrix
+annual_A = zeros(n1,6); %Create an empty 4by6 matrix to store annual returns
+for i=1:n1 %Cycle through rows of annual matrix
     raw = 1+raw_interval_A(12*(i-1)+1,:); 
     for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
-        raw = raw.*(1+raw_interval_A(j,:)) 
+        raw = raw.*(1+raw_interval_A(j,:))
     end
     annual_A(i,1:6) = raw;
 end
 annual_A = annual_A-1;
 
 %Interval B
-annual_B = zeros(3,6); %Create an empty 3by6 matrix to store annual returns
-for i=1:3 %Cycle through rows of annual matrix
+annual_B = zeros(n1,6); %Create an empty 4by6 matrix to store annual returns
+for i=1:n1 %Cycle through rows of annual matrix
     raw = 1+raw_interval_B(12*(i-1)+1,:); 
     for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
         raw = raw.*(1+raw_interval_B(j,:));
@@ -193,22 +193,31 @@ utility_B = double(exp(-2*f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)-g(SS.w1,SS.w2,S
 %Part a
 
 %Efficient Frontier
-clear p
-p = Portfolio;
-p = Portfolio(p,'AssetMean', mu_R2_A, 'AssetCovar', C_R2_A);
-p = Portfolio(p, 'lowerbudget', 1, 'upperbudget', 1);
-p = Portfolio(p, 'lowerbound', 0);
-
-clear q
-q = Portfolio;
-q = Portfolio(q,'AssetMean', mu_R2_B, 'AssetCovar', C_R2_B);
-q = Portfolio(q, 'lowerbudget', 1, 'upperbudget', 1);
-q = Portfolio(q, 'lowerbound', 0);
-
-plotFrontier(p);
-hold on;
-plotFrontier(q)
-
+% clear p
+% p = Portfolio;
+% p = Portfolio(p,'AssetMean', mu_R2_A, 'AssetCovar', C_R2_A);
+% p = Portfolio(p, 'lowerbudget', 1, 'upperbudget', 1);
+% p = Portfolio(p, 'lowerbound', 0);
+% 
+% clear q
+% q = Portfolio;
+% q = Portfolio(q,'AssetMean', mu_R2_B, 'AssetCovar', C_R2_B);
+% q = Portfolio(q, 'lowerbudget', 1, 'upperbudget', 1);
+% q = Portfolio(q, 'lowerbound', 0);
+% 
+% [px,py]=plotFrontier(p);
+% display(px)
+% display(py)
+% hold on;
+% plotFrontier(q)
+% hold off;
+% legend({'p','q'})
+e = ones(1,6);
+eT = transpose(e);
+%Portfolio parameters
+a = e*corr_R2_A*eT;
+b = e*corr_R2_A*transpose(mu_R2_A);
+c = 
 %Part b - Optimal Portfolio with Constraints
 
 

@@ -12,7 +12,7 @@ opts.VariableTypes = ["datetime", "double", "double", "double", "double", "doubl
 opts = setvaropts(opts, "DATE", "InputFormat", "");
 
 % Import the data
-data = readtable("/Users/Dan/Downloads/FMAT3888/Data.xlsx", opts, "UseExcel", false);
+data = readtable("rawdata.xlsx", opts, "UseExcel", false);
 
 %Prepare Data
 
