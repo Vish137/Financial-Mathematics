@@ -34,6 +34,8 @@ data.Properties.VariableNames = colnames;
 %Remove First Row
 data(1,:) = [];
 
+%hey
+
 %PARAMETER ESTIMATION
 
 %Question 1
@@ -219,5 +221,7 @@ a = eT*inv(C_R2_A)*e;
 b = mu_R2_A;
 %this is a change
 %Part b - Optimal Portfolio with Constraints
+
+%hello
 
 
