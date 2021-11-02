@@ -194,32 +194,32 @@ utility_B = double(exp(-f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)+0.5*g(SS.w1,SS.w2
 %Question 5
 
 %Part a
-
-%Efficient Frontier
-% clear p
-% p = Portfolio;
-% p = Portfolio(p,'AssetMean', mu_R2_A, 'AssetCovar', C_R2_A);
-% p = Portfolio(p, 'lowerbudget', 1, 'upperbudget', 1);
-% p = Portfolio(p, 'lowerbound', 0);
-% 
-% clear q
-% q = Portfolio;
-% q = Portfolio(q,'AssetMean', mu_R2_B, 'AssetCovar', C_R2_B);
-% q = Portfolio(q, 'lowerbudget', 1, 'upperbudget', 1);
-% q = Portfolio(q, 'lowerbound', 0);
-% 
-% [px,py]=plotFrontier(p);
-% display(px)
-% display(py)
-% hold on;
-% plotFrontier(q)
-% hold off;
-% legend({'p','q'})
+  
+%CLASSICAL METHOD OF OBTAINING EFFICIENT FRONTIER FOR R(2)B
+%Matrix vectors
 e = ones(6,1);
 eT = transpose(e);
+
 %Portfolio parameters
 a = eT*inv(C_R2_B)*e;
-b = inv(C_R2_B)*transpose(mu_R2_A);
-%this is a change
-%Part b - Optimal Portfolio with Constraints
-  
+b = mu_R2_B*inv(C_R2_B)*e;
+c =  mu_R2_B*inv(C_R2_B)*transpose(mu_R2_B);
+d = a*c - b^2;
+
+%Minimum variance portfolio coordinates
+mu0 = b/a;var0 = 1/a;
+
+%Space of mu-sigma^2
+t = linspace(-10,10,100);
+mu = (b + d*t)/a;
+var = (1 + d*t.^2)/a;
+
+%Plotting figure
+figure(1)
+plot(var,mu,'LineWidth',2,'Color','magenta')
+ylim([mu0,inf])
+xlim([var0,inf])
+title('Efficient Frontier of R(2)B')
+xlabel('Variance, $\sigma^2$','Interpreter','latex')
+ylabel('Mean, $\mu$','Interpreter','latex')
+saveas(gcf,'r1b_EF','png')
