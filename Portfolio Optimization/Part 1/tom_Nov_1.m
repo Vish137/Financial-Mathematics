@@ -217,6 +217,7 @@ eT = transpose(e);
 %Portfolio parameters
 a = eT*inv(C_R2_A)*e;
 b = mu_R2_A;
+%this is a change
 %Part b - Optimal Portfolio with Constraints
 
 
