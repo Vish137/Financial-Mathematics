@@ -83,11 +83,11 @@ n1=4; %number of years in period 1
 %Interval A
 annual_A = zeros(n1,6); %Create an empty 4by6 matrix to store annual returns
 for i=1:n1 %Cycle through rows of annual matrix
-    raw = 1+raw_interval_A(12*(i-1)+1,:); 
+    raw = 1+raw_interval_A(12*(i-1)+1,:); %Growth in January
     for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
-        raw = raw.*(1+raw_interval_A(j,:))
+        raw = raw.*(1+raw_interval_A(j,:));
     end
-    annual_A(i,1:6) = raw;
+    annual_A(i,:) = raw;
 end
 annual_A = annual_A-1;
 
@@ -98,30 +98,34 @@ for i=1:n1 %Cycle through rows of annual matrix
     for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
         raw = raw.*(1+raw_interval_B(j,:));
     end
-    annual_B(i,1:6) = raw;
+    annual_B(i,:) = raw;
 end
 annual_B = annual_B-1;
 
 %Calculate 2 Year Returns
+
+n2=2; 
+months2=24;
+
 %Interval A
-two_year_A = zeros(2,6);
-for i = 1:2
-    row = 1+annual_A(i,:);
-    for j = i+1:i+1
-        row = row.*(1+annual_A(j,:));
+two_year_A = zeros(n2,6);
+for i=1:n2 
+    raw = 1+raw_interval_A(months2*(i-1)+1,:); 
+    for j = ((i-1)*months2+1)+1:i*months2 
+        raw = raw.*(1+raw_interval_A(j,:));
     end
-    two_year_A(i,1:6) = row;
+    two_year_A(i,:) = raw;
 end
 two_year_A = two_year_A-1;
 
 %Interval B
-two_year_B = zeros(2,6);
-for i = 1:2
-    row = 1+annual_B(i,:);
-    for j = i+1:i+1
-        row = row.*(1+annual_B(j,:));
+two_year_B = zeros(n2,6);
+for i=1:n2 
+    raw = 1+raw_interval_B(months2*(i-1)+1,:); 
+    for j = ((i-1)*months2+1)+1:i*months2 
+        raw = raw.*(1+raw_interval_B(j,:));
     end
-    two_year_B(i,1:6) = row;
+    two_year_B(i,:) = raw;
 end
 two_year_B = two_year_B-1;
 
@@ -218,4 +222,4 @@ a = eT*inv(C_R2_B)*e;
 b = inv(C_R2_B)*transpose(mu_R2_A);
 %this is a change
 %Part b - Optimal Portfolio with Constraints
-
+  
