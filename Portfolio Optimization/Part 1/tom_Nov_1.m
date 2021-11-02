@@ -216,10 +216,11 @@ e = ones(6,1);
 eT = transpose(e);
 %Portfolio parameters
 a = eT*inv(C_R2_B)*e;
-b = inv(C_R2_B)*transpose(mu_R2_A);
+b = mu_R2_B*inv(C_R2_B)*e;
+c =  mu_R2_B*inv(C_R2_B)*transpose(mu_R2_B);
+d = a*c - b^2;
+mu0 = b/a;var0 = 1/a;
 %this is a change
 %Part b - Optimal Portfolio with Constraints
 
-%hello
-% hi there
 
