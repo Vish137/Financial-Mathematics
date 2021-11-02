@@ -228,8 +228,8 @@ mu0 = b/a;var0 = 1/a;
 
 %Space of mu-sigma^2
 t = linspace(-10,10,100);
-mu = (b + d*t)/a;
-var = (1 + d*t.^2)/a;
+mu = (b + d*t)./a;
+var = (1 + d*t.^2)./a;
 
 %Plotting figure
 figure(1)
