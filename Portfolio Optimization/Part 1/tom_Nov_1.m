@@ -215,8 +215,8 @@ utility_B = double(exp(-2*f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)-g(SS.w1,SS.w2,S
 e = ones(6,1);
 eT = transpose(e);
 %Portfolio parameters
-a = eT*inv(C_R2_A)*e;
-b = mu_R2_A;
+a = eT*inv(C_R2_B)*e;
+b = inv(C_R2_B)*transpose(mu_R2_A);
 %this is a change
 %Part b - Optimal Portfolio with Constraints
 
