@@ -34,8 +34,6 @@ data.Properties.VariableNames = colnames;
 %Remove First Row
 data(1,:) = [];
 
-%hey
-
 %PARAMETER ESTIMATION
 
 %Question 1
