@@ -211,18 +211,32 @@ utility_B = double(exp(-f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)+0.5*g(SS.w1,SS.w2
 % plotFrontier(q)
 % hold off;
 % legend({'p','q'})
+
+%CLASSICAL METHOD OF OBTAINING EFFICIENT FRONTIER FOR R(2)B
+%Matrix vectors
 e = ones(6,1);
 eT = transpose(e);
+
 %Portfolio parameters
 a = eT*inv(C_R2_B)*e;
 b = mu_R2_B*inv(C_R2_B)*e;
 c =  mu_R2_B*inv(C_R2_B)*transpose(mu_R2_B);
 d = a*c - b^2;
+
+%Minimum variance portfolio coordinates
 mu0 = b/a;var0 = 1/a;
-%this is a change
-%Part b - Optimal Portfolio with Constraints
 
-<<<<<<< HEAD
+%Space of mu-sigma^2
+t = linspace(-10,10,100);
+mu = (b + d*t)/a;
+var = (1 + d*t.^2)/a;
 
-=======
->>>>>>> c9e339a7f177eddf72d5fb8a49f564f8e5c3f336
+%Plotting figure
+figure(1)
+plot(var,mu,'LineWidth',2,'Color','magenta')
+ylim([mu0,inf])
+xlim([var0,inf])
+title('Efficient Frontier of R(2)B')
+xlabel('Variance, $\sigma^2$','Interpreter','latex')
+ylabel('Mean, $\mu$','Interpreter','latex')
+saveas(gcf,'r1b_EF','png')
