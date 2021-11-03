@@ -189,6 +189,35 @@ SS = solve(w1+w2+w3+w4+w5+w6 == 1,lambda == (-mu_R2_B(1)+w1*C_R2_B(1,1))*exp(-mu
 %Calculate Expected Utility from Solution
 
 utility_B = double(exp(-f(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)+0.5*g(SS.w1,SS.w2,SS.w3,SS.w4,SS.w5,SS.w6)));
+
+%Question 4c
+
+%Define Interval C
+date_C_1 = find(data.Date == '30-Jan-2015');
+date_C_2 = find(data.Date == '30-Dec-2016');
+
+interval_C = data(date_C_1:date_C_2,:);
+
+%Isolate Raw Data for C
+raw_interval_C = interval_C(:,2:7);
+raw_interval_C = table2array(raw_interval_C);
+
+%Calculate Return for Period C (i.e. 2 year return)
+realised_return_C = zeros(1,6);
+raw_C = 1+raw_interval_C(1,:);
+for i = 2:24
+    raw_C = raw_C.*(1+raw_interval_C(i,:));
+end
+raw_C = raw_C-1; 
+    
+%Calculate Realised Utility
+
+%Using weights from Period A
+realised_utility_A = double(-exp(-(raw_C(1)*S.w1+raw_C(2)*S.w2+raw_C(3)*S.w3+raw_C(4)*S.w4+raw_C(5)*S.w5+raw_C(6)*S.w6)));
+
+%Using Weights from Period B
+realised_utility_B = double(-exp(-(raw_C(1)*SS.w1+raw_C(2)*SS.w2+raw_C(3)*SS.w3+raw_C(4)*SS.w4+raw_C(5)*SS.w5+raw_C(6)*SS.w6)));
+
 %%
 
 %Question 5
@@ -223,3 +252,30 @@ title('Efficient Frontier of R(2)B')
 xlabel('Variance, $\sigma^2$','Interpreter','latex')
 ylabel('Mean, $\mu$','Interpreter','latex')
 saveas(gcf,'r1b_EF','png')
+
+%Part b
+
+%Using Interval A Data
+
+syms w1 w2 w3 w4 w5 w6 lambda_1 lambda_2 s
+A = [w1 w2 w3 w4 w5 w6] * C_R2_A * transpose([w1 w2 w3 w4 w5 w6]); %Objective
+V_1 = w1+w2+w3+w4+w5+w6 -1 == 0; %Constraint 1
+V_2 = w1*mu_R2_A(1)+w2*mu_R2_A(2)+w3*mu_R2_A(3)+w4*mu_R2_A(4)+w5*mu_R2_A(5)+w6*mu_R2_A(6) - 0.12 - s^2 == 0; %Constraint 2
+L = A - lambda_1 * lhs(V_1) - lambda_2 * lhs(V_2); %Lagrange 
+
+dL_dw1 = diff(L, w1) == 0; % derivative of L with respect to w1
+dL_dw2 = diff(L, w2) == 0; % derivative of L with respect to w2
+dL_dw3 = diff(L, w3) == 0; % derivative of L with respect to w3
+dL_dw4 = diff(L, w4) == 0; % derivative of L with respect to w4
+dL_dw5 = diff(L, w5) == 0; % derivative of L with respect to w5
+dL_dw6 = diff(L, w6) == 0; % derivative of L with respect to w6
+dL_dlambda_1 = diff(L,lambda_1) == 0; % derivative of L with respect to lambda 1
+dL_dlambda_2 = diff(L,lambda_2) == 0; % derivative of L with respect to lambda 2
+
+system = [dL_dw1;dL_dw2;dL_dw3;dL_dw4;dL_dw5;dL_dw6;dL_dlambda_1;dL_dlambda_2;s]; % build the system of equations
+s == 0;
+
+%[w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_1_val,lambda_2_val, s_val] = solve(system, [w1 w2 w3 w4 w5 w6 lambda_1 lambda_2 s], 'Real', true);
+%results_numeric = [w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_1_val, lambda_2_val, s_val];
+
+%Using Interval B Data
