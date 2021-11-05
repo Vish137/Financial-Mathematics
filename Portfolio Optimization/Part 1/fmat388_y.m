@@ -21,7 +21,7 @@ opts.VariableTypes = ["datetime", "double", "double", "double", "double", "doubl
 opts = setvaropts(opts, "DATE", "InputFormat", "");
 
 % Import the data
-data = readtable("/Users/yangyingkang/Downloads/chrome下载/rawdata.xlsx", opts, "UseExcel", false);
+data = readtable("rawdata.xlsx", opts, "UseExcel", false);
 
 %Prepare Data
 
@@ -105,8 +105,8 @@ annual_B = annual_B-1;
 %find annual ruturn R^(1)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%naivea proach
 number_of_month=12;
 expected_1year_ruturn_intervar_A=a_A*12;
-cov_1year_A=C_A*12
-rho_1year=corrcov(cov_1year_A)%%%rho
+cov_1year_A=C_A*12;
+rho_1year=corrcov(cov_1year_A);%%%rho
 
 
 %Calculate 2 Year Returns
@@ -242,7 +242,6 @@ a = eT*inv(C_R2_B)*e;
 b = mu_R2_B*inv(C_R2_B)*e;
 c =  mu_R2_B*inv(C_R2_B)*transpose(mu_R2_B);
 d = a*c - b^2;
-C_R2_B
 inv(C_R2_B)
 %Minimum variance portfolio coordinates
 mu0 = b/a;var0 = 1/a;
