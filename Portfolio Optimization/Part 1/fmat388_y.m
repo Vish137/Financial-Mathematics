@@ -167,7 +167,7 @@ clear w1 w2 w3 w4 w5 w6 lambda
 
 syms f(w1,w2,w3,w4,w5,w6) g(w1,w2,w3,w4,w5,w6)
 f(w1,w2,w3,w4,w5,w6) = w1*mu_R2_A(1)+w2*mu_R2_A(2)+w3*mu_R2_A(3)+w4*mu_R2_A(4)+w5*mu_R2_A(5)+w6*mu_R2_A(6);
-g(w1,w2,w3,w4,w5,w6) = w1^2*C_R2_A(1,1)+w2^2*C_R2_A(2,2)+w3^2*C_R2_A(3,3)+w4^2*C_R2_A(4,4)+w5^2*C_R2_A(5,5)+w6^2*C_R2_A(6,6);
+g(w1,w2,w3,w4,w5,w6) = w1^2*C_R2_A(1,1) + w2^2*C_R2_A(2,2) + w3^2*C_R2_A(3,3)+w4^2*C_R2_A(4,4)+w5^2*C_R2_A(5,5)+w6^2*C_R2_A(6,6);
 
 mu_A = f(w1,w2,w3,w4,w5,w6);
 sigma_A = g(w1,w2,w3,w4,w5,w6);
@@ -247,7 +247,7 @@ inv(C_R2_B)
 mu0 = b/a;var0 = 1/a;
 
 %Space of mu-sigma^2
-t = linspace(-10,10,100);
+t = linspace(-.1,.10,100);
 mu = (b + d*t)/a;
 var = (1 + d*t.^2)/a;
 
