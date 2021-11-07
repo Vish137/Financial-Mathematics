@@ -78,78 +78,106 @@ C_B = cov(B_normal); %Find covariance matrix
 %%
 %Question 3
 
-%Find Annual Returns
-n1=4; %number of years in period 1
-%Interval A
-annual_A = zeros(n1,6); %Create an empty 4by6 matrix to store annual returns
-for i=1:n1 %Cycle through rows of annual matrix
-    raw = 1+raw_interval_A(12*(i-1)+1,:); %Growth in January
-    for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
-        raw = raw.*(1+raw_interval_A(j,:));
-    end
-    annual_A(i,:) = raw;
-end
-annual_A = annual_A-1;
+% %Find Annual Returns
+% n1=4; %number of years in period 1
+% %Interval A
+% annual_A = zeros(n1,6); %Create an empty 4by6 matrix to store annual returns
+% for i=1:n1 %Cycle through rows of annual matrix
+%     raw = 1+raw_interval_A(12*(i-1)+1,:); %Growth in January
+%     for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
+%         raw = raw.*(1+raw_interval_A(j,:));
+%     end
+%     annual_A(i,:) = raw;
+% end
+% annual_A = annual_A-1;
 
-%Interval B
-annual_B = zeros(n1,6); %Create an empty 4by6 matrix to store annual returns
-for i=1:n1 %Cycle through rows of annual matrix
-    raw = 1+raw_interval_B(12*(i-1)+1,:); 
-    for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
-        raw = raw.*(1+raw_interval_B(j,:));
-    end
-    annual_B(i,:) = raw;
-end
-annual_B = annual_B-1;
+% %Interval B
+% annual_B = zeros(n1,6); %Create an empty 4by6 matrix to store annual returns
+% for i=1:n1 %Cycle through rows of annual matrix
+%     raw = 1+raw_interval_B(12*(i-1)+1,:); 
+%     for j = ((i-1)*12+1)+1:i*12 %Cycle through each set of 12 rows (raws)
+%         raw = raw.*(1+raw_interval_B(j,:));
+%     end
+%     annual_B(i,:) = raw;
+% end
+% annual_B = annual_B-1;
+% 
+% %Calculate 2 Year Returns
+% 
+% n2=2; 
+% months2=24;
+% 
+% %Interval A
+% two_year_A = zeros(n2,6);
+% for i=1:n2 
+%     raw = 1+raw_interval_A(months2*(i-1)+1,:); 
+%     for j = ((i-1)*months2+1)+1:i*months2 
+%         raw = raw.*(1+raw_interval_A(j,:));
+%     end
+%     two_year_A(i,:) = raw;
+% end
+% two_year_A = two_year_A-1;
+% 
+% %Interval B
+% two_year_B = zeros(n2,6);
+% for i=1:n2 
+%     raw = 1+raw_interval_B(months2*(i-1)+1,:); 
+%     for j = ((i-1)*months2+1)+1:i*months2 
+%         raw = raw.*(1+raw_interval_B(j,:));
+%     end
+%     two_year_B(i,:) = raw;
+% end
+% two_year_B = two_year_B-1;
 
-%Calculate 2 Year Returns
+% %Estimate Parameters for R1 and R2
+% 
+% %Interval A
+% mu_R1_A = mean(annual_A);
+% mu_R2_A = mean(two_year_A);
+% 
+% C_R1_A = cov(annual_A);
+% C_R2_A = cov(two_year_A);
+% 
+% corr_R1_A = corrcoef(annual_A);
+% corr_R2_A = corrcoef(two_year_A);
+% 
+% %Interval B
+% mu_R1_B = mean(annual_B);
+% mu_R2_B = mean(two_year_B);
+% 
+% C_R1_B = cov(annual_B);
+% C_R2_B = cov(two_year_B);
+% 
+% corr_R1_B = corrcoef(annual_B);
+% corr_R2_B = corrcoef(two_year_B);
 
-n2=2; 
-months2=24;
+%(Vish)---------------------------------------------------
+%We have all our monthly returns and covariaces in Q1 already - now we need
+%to use the results in Q2 to calculate these parameters
 
-%Interval A
-two_year_A = zeros(n2,6);
-for i=1:n2 
-    raw = 1+raw_interval_A(months2*(i-1)+1,:); 
-    for j = ((i-1)*months2+1)+1:i*months2 
-        raw = raw.*(1+raw_interval_A(j,:));
-    end
-    two_year_A(i,:) = raw;
-end
-two_year_A = two_year_A-1;
+%Using naive method 
 
-%Interval B
-two_year_B = zeros(n2,6);
-for i=1:n2 
-    raw = 1+raw_interval_B(months2*(i-1)+1,:); 
-    for j = ((i-1)*months2+1)+1:i*months2 
-        raw = raw.*(1+raw_interval_B(j,:));
-    end
-    two_year_B(i,:) = raw;
-end
-two_year_B = two_year_B-1;
+%Yealry Interval (A)
+mu_R1_A = 12*a_A; %na 
+C_R1_A = 12.*C_A; %nB
+corr_R1_A = corrcoef(mu_R1_A);
 
-%Estimate Parameters for R1 and R2
+%Two-Yearly Interval (A)
+mu_R2_A = 24*a_A; %na
+C_R2_A = 24.*C_A; %nB
+corr_R2_A = corrcoef(mu_R2_A);
 
-%Interval A
-mu_R1_A = mean(annual_A);
-mu_R2_A = mean(two_year_A);
+%Yealry Interval (B)
+mu_R1_B = 12*a_B; %na 
+C_R1_B = 12.*C_B; %nB
+corr_R1_B = corrcoef(mu_R1_B);
 
-C_R1_A = cov(annual_A);
-C_R2_A = cov(two_year_A);
+%Two-Yearly Interval (B)
+mu_R2_B = 24*a_B; %na
+C_R2_B = 24.*C_B; %nB
+corr_R2_B = corrcoef(mu_R2_B); 
 
-corr_R1_A = corrcoef(annual_A);
-corr_R2_A = corrcoef(two_year_A);
 
-%Interval B
-mu_R1_B = mean(annual_B);
-mu_R2_B = mean(two_year_B);
-
-C_R1_B = cov(annual_B);
-C_R2_B = cov(two_year_B);
-
-corr_R1_B = corrcoef(annual_B);
-corr_R2_B = corrcoef(two_year_B);
 
 %%
 %Question 4
@@ -239,18 +267,31 @@ d = a*c - b^2;
 mu0 = b/a;var0 = 1/a;
 
 %Space of mu-sigma^2
-t = linspace(-10,10,100);
+t = linspace(-0.1,0.1,100);
 mu = (b + d*t)/a;
 var = (1 + d*t.^2)/a;
 
+%Determining thresholds
+threshold = b/a;
+moreThanThreshold = mu > threshold;
+
+overVar = var(moreThanThreshold);
+overMu = mu(moreThanThreshold);
+
 %Plotting figure
 figure(1)
-plot(var,mu,'LineWidth',2,'Color','magenta')
-ylim([mu0,inf])
-xlim([var0,inf])
-title('Efficient Frontier of R(2)B')
-xlabel('Variance, $\sigma^2$','Interpreter','latex')
-ylabel('Mean, $\mu$','Interpreter','latex')
+
+plot(var,mu,'LineWidth',1,'Color','black')
+hold on
+plot(overVar,overMu,'-','Color','red','LineWidth',2)
+hold on
+plot(var0,mu0,'*','Color','blue','MarkerSize',10)
+%ylim([mu0,inf])
+xlim([-0.02,0.15])
+title('Efficient Frontier of $R^{(2)}_{B}$','Interpreter','latex')
+xlabel('Variance, $\sigma^2$','Interpreter','latex','FontSize',13)
+ylabel('Mean, $\mu$','Interpreter','latex','FontSize',13)
+legend({'Ineficient Frontier','Efficient Frontier','Min-Risk Portfolio, \mu \approx 0.07'},'Location','northwest')
 saveas(gcf,'r1b_EF','png')
 
 %Part b
@@ -275,7 +316,7 @@ dL_dlambda_2 = diff(L,lambda_2) == 0; % derivative of L with respect to lambda 2
 system = [dL_dw1;dL_dw2;dL_dw3;dL_dw4;dL_dw5;dL_dw6;dL_dlambda_1;dL_dlambda_2;s]; % build the system of equations
 s == 0;
 
-%[w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_1_val,lambda_2_val, s_val] = solve(system, [w1 w2 w3 w4 w5 w6 lambda_1 lambda_2 s], 'Real', true);
-%results_numeric = [w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_1_val, lambda_2_val, s_val];
+[w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_1_val,lambda_2_val, s_val] = solve(system, [w1 w2 w3 w4 w5 w6 lambda_1 lambda_2 s], 'Real', true);
+results_numeric = [w1_val, w2_val, w3_val, w4_val, w5_val, w6_val, lambda_1_val, lambda_2_val, s_val];
 
 %Using Interval B Data
