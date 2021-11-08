@@ -287,12 +287,12 @@ plot(overVar,overMu,'-','Color','red','LineWidth',2)
 hold on
 plot(var0,mu0,'*','Color','blue','MarkerSize',10)
 %ylim([mu0,inf])
-xlim([-0.02,0.15])
+xlim([-0.005,0.15])
 title('Efficient Frontier of $R^{(2)}_{B}$','Interpreter','latex')
 xlabel('Variance, $\sigma^2$','Interpreter','latex','FontSize',13)
 ylabel('Mean, $\mu$','Interpreter','latex','FontSize',13)
-legend({'Ineficient Frontier','Efficient Frontier','Min-Risk Portfolio, \mu \approx 0.07'},'Location','northwest')
-saveas(gcf,'r1b_EF','png')
+legend({'Inefficient Frontier','Efficient Frontier','Min-Risk Portfolio, \mu \approx 0.07'},'Location','northwest')
+saveas(gcf,'r1a_EF','png')
 
 %Part b
 
